@@ -1,0 +1,26 @@
+{
+  "name": "ezystress",
+  "version": "1.0.0",
+  "description": "this is a stress testing tool which make stress testing easy provides the genetive functions out of the box ",
+  "main": "App.jsx",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nishcurse/EzStressTester-.git"
+  },
+  "keywords": [
+    "nish"
+  ],
+  "author": "Utkarsh Mudgal (nishcurse)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nishcurse/EzStressTester-/issues"
+  },
+  "homepage": "https://github.com/nishcurse/EzStressTester-#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "uuid": "^11.1.0"
+  }
+}
