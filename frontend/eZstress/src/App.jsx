@@ -1,35 +1,44 @@
 import React from "react";
 import { Editor } from "@monaco-editor/react";
 import Tabbar from "./components/Tabbar";
-import files from "./assets/files";
 import Curr from "./store/Curr";
-import axios from "axios"
+import axios from "axios";
 import Out from "./store/Output";
 import ButtStore from "./store/Rename";
+import FileStore from "./store/FileStore";
 
 function App() {
-  const { ActiveTab} = Curr(state => state);
-  function handleEditorChange(newState){
-    files[ActiveTab].value = newState;
+  const { ActiveTab } = Curr((state) => state);
+  const {currCont, setCurrCont} = FileStore((state)=>state);
+  function handleEditorChange(newState) {
+    setCurrCont({
+      ...currCont,
+      [ActiveTab]: {
+        ...currCont[ActiveTab],
+        value: newState,
+      },
+    });
   }
-  const {Output, setOutput} = Out(state => state);
-  const {current, Updateme} = ButtStore(state => state);
+  const { Output, setOutput } = Out((state) => state);
+  const { current, Updateme } = ButtStore((state) => state);
   console.log(Output);
-  async function StressItUP(){
+  async function StressItUP() {
     const data = {
-      brute : files[`brute.cpp`].value,
-      optimal : files['optimal.cpp'].value, 
-      generative : files['generate.cpp'].value
-    }
-    Updateme(`Loading...`)
-    setOutput(`Running the stress tester kindly wait till we find your cases....(Made by nish)`);
+      brute: currCont[`brute.cpp`].value,
+      optimal: currCont["optimal.cpp"].value,
+      generative: currCont["generate.cpp"].value,
+    };
+    Updateme(`Loading...`);
+    setOutput(
+      `Running the stress tester kindly wait till we find your cases....(Made by nish)`
+    );
     console.log(data);
-    try{
+    try {
       const resp = await axios.post(`http://localhost:9696/run-code`, data);
-      setOutput(resp.data.output)
-      Updateme(`Stress-me`)
-    }catch(error){
-      setOutput(`Error has occured Please Raise a issue: ${error}`); 
+      setOutput(resp.data.output);
+      Updateme(`Stress-me`);
+    } catch (error) {
+      setOutput(`Error has occured Please Raise a issue: ${error}`);
       Updateme(`Stress-me`);
     }
   }
@@ -51,9 +60,9 @@ function App() {
             <Editor
               height="80vh"
               theme="vs-dark"
-              path={files[ActiveTab].name}
-              defaultLanguage={files[ActiveTab].language}
-              value={files[ActiveTab].value}
+              path={currCont[ActiveTab].name}
+              defaultLanguage={currCont[ActiveTab].language}
+              value={currCont[ActiveTab].value}
               onChange={handleEditorChange}
             />
           </div>
@@ -63,10 +72,15 @@ function App() {
               theme="vs-dark"
               path="output.txt"
               defaultLanguage="text"
-              value = {Output}
+              value={Output}
               options={{ readOnly: true }}
             />
-            <button className="ml-2 self-center rounded-lg w-fit my-10 px-3 py-2 ring-1 ring-sky-50 text-white hover:bg-neutral-700" onClick={StressItUP}>{current}</button>
+            <button
+              className="ml-2 self-center rounded-lg w-fit my-10 px-3 py-2 ring-1 ring-sky-50 text-white hover:bg-neutral-700"
+              onClick={StressItUP}
+            >
+              {current}
+            </button>
           </div>
         </div>
         <div className="flex flex-row items-center justify-between gap-4"></div>
