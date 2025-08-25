@@ -82,5 +82,5 @@ for ((i=1; i<=${NUM_TEST_CASES}; i++)); do
 done
 
 echo "-----------------------------------"
-echo "[SUCCESS] All Testcases Passed ! Try again or you are just correct! "
+echo "[SUCCESS] All Testcases Passed  ! Lol Created by nish ! "
 echo "-----------------------------------"

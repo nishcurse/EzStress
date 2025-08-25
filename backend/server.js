@@ -5,13 +5,10 @@ const { exec } = require("child_process");
 const path = require("path");
 const os = require("os"); 
 const { v4: uuidv4 } = require('uuid');
-
+const cors  = require("cors")
 app.use(express.json());
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+app.use(cors());
+
 
 async function CreateFile(brute, optimal, generative, dir) {
     try {
@@ -52,7 +49,7 @@ app.post('/run-code', async function(req, res) {
         console.log("file Created", tempDirName);
         
         // Corrected the docker run command to use the local temp path
-        const dockerRun = `sudo docker run --rm -v "${tempDirPath}":/app/tests --workdir /app --network none --memory=512m --cpus="1.0" stress-me ./mn_load.sh`;
+        const dockerRun = `sudo docker run --rm -v "${tempDirPath}":/app/tests --workdir /app --network none --memory=512m --cpus="1.0" stress2 ./mn_load.sh`;
 
         await exec(dockerRun, { timeout: 10000 }, async (error, stdout, stderr) => {
             // Cleanup happens here, after the exec command completes
@@ -78,6 +75,6 @@ app.post('/run-code', async function(req, res) {
     }
 });
 
-app.listen(9696, () => {
-    console.log(`Server listening on port 9696`);
+app.listen(80, () => {
+    console.log(`Server listening on port 80`);
 });
