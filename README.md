@@ -1,5 +1,3 @@
-Based on the text you provided, here is a reformatted version of the documentation for your **EzStress** project. I have organized the information logically with clear headings and bullet points to improve readability.
-
 -----
 
 # EzStress - GUI Version of EzStress Tester
@@ -64,11 +62,5 @@ Stop writing custom generators for common tasks\! Simply use the following funct
 
 ### The Team
 
-We built this to make stress testing easier for everyone\! Feedback and contributions are strongly welcomed.
-
-**Team Coding Wiz**
-
   * [Nish](https://github.com/nishcurse)
-  * [gokuu007](https://github.com/GokuUu007)
 
-**Thank you for trying the Stress Tester\!** Found a bug or want to suggest a feature? [Open an issue or PR](https://github.com/nishcurse/EzStressTester-/issues) — we appreciate your feedback\!
