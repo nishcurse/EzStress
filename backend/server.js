@@ -48,11 +48,14 @@ app.post('/run-code', async function(req, res) {
         await CreateFile(brute, optimal, generative, tempDirPath);
         console.log("file Created", tempDirName);
         
-        // Corrected the docker run command to use the local temp path
         const dockerRun = `sudo docker run --rm -v "${tempDirPath}":/app/tests --workdir /app --network none --memory=512m --cpus="1.0" stress2 ./mn_load.sh`;
+            const execOptions = {
+                timeout: 10000,
+                maxBuffer: 1024 * 1024 * 10, 
+            };
 
-        await exec(dockerRun, { timeout: 10000 }, async (error, stdout, stderr) => {
-            // Cleanup happens here, after the exec command completes
+
+        await exec(dockerRun, execOptions, async (error, stdout, stderr) => {
             await DeleteFile(tempDirPath);
 
             if (stderr) {
@@ -69,7 +72,6 @@ app.post('/run-code', async function(req, res) {
 
     } catch (err) {
         console.error('Processing error:', err);
-        // Also cleanup on a file creation error
         await DeleteFile(tempDirPath);
         res.status(500).json({ error: 'Failed to process request.' });
     }

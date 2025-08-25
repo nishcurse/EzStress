@@ -21,7 +21,7 @@ function App() {
   }
   const { Output, setOutput } = Out((state) => state);
   const { current, Updateme } = ButtStore((state) => state);
-  console.log(Output);
+  // console.log(Output); 
   async function StressItUP() {
     const data = {
       brute: currCont[`brute.cpp`].value,
@@ -34,7 +34,8 @@ function App() {
     );
     console.log(data);
     try {
-      const resp = await axios.post(`http://localhost:9696/run-code`, data);
+      const url = import.meta.env.VITE_API_URL; 
+      const resp = await axios.post(url, data);
       setOutput(resp.data.output);
       Updateme(`Stress-me`);
     } catch (error) {
@@ -76,7 +77,7 @@ function App() {
               options={{ readOnly: true }}
             />
             <button
-              className="ml-2 self-center rounded-lg w-fit my-10 px-3 py-2 ring-1 ring-sky-50 text-white hover:bg-neutral-700"
+              className="mx-4 self-center rounded-lg w-fit my-10 px-4 py-2 ring-1 ring-sky-50 text-white hover:bg-neutral-700"
               onClick={StressItUP}
             >
               {current}
