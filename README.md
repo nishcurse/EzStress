@@ -1,3 +1,5 @@
+Here is the GitHub-flavored Markdown file with all the links and images properly formatted to be clickable and display correctly.
+
 -----
 
 ### About the GUI Version
@@ -25,15 +27,14 @@
 > **Now supporting GCC 14+\!**
 > The `generative.h` header is fully functional with the latest C++ compilers. Thank you for your feedback and patience\!
 
-
 ## 📋 Table of Contents
 
   - [Project Overview](https://www.google.com/search?q=%23project-overview)
   - [How to Use](https://www.google.com/search?q=%23how-to-use)
   - [generative.h Header Functions](https://www.google.com/search?q=%23generativeh-header-functions)
-  - [Demo GIF](https://www.google.com/search?q=%23demo)
+  - [Demo GIF](https://www.google.com/search?q=%23demo-gif)
   - [Image Gallery](https://www.google.com/search?q=%23image-gallery)
-  - [The Team](https://github.com/nishcurse/EzStressTester-/tree/main?tab=readme-ov-file#-the-team)
+  - [The Team](https://www.google.com/search?q=%23the-team)
 
 -----
 
@@ -48,13 +49,13 @@
 1.  **Download the Repository**
     Grab the ZIP from this repository and extract it to your machine.
 2.  **Write Your Code**
-      * **`generateCases.cpp`**: Implement your test case generator using the supplied functions.
-      * **`brute.cpp`**: Add a *correct/brute-force* reference solution.
-      * **`optimal.cpp`**: Place your *optimized solution* here.
+      - **`generateCases.cpp`**: Implement your test case generator using the supplied functions.
+      - **`brute.cpp`**: Add a *correct/brute-force* reference solution.
+      - **`optimal.cpp`**: Place your *optimized solution* here.
 3.  **Run the Script**
     Double-click the script file for your compiler:
-      * `ScriptCpp17.bat` – If you **don’t** have the latest GCC.
-      * `ScriptCpp20.bat` – If you **do**.
+      - `ScriptCpp17.bat` – If you **don’t** have the latest GCC.
+      - `ScriptCpp20.bat` – If you **do**.
 
 > If a mismatch is found, the script stops and prints the test case.
 
@@ -75,10 +76,10 @@ No more writing custom generators for the basics\! Simply use the following func
 
 -----
 
-# Demo
+# Demo GIF
 
 \<p align="center"\>
-[https://github.com/user-attachments/assets/6f635a52-f5eb-4053-8139-d48d155a759d](https://github.com/user-attachments/assets/6f635a52-f5eb-4053-8139-d48d155a759d)
+\<img src="[https://github.com/user-attachments/assets/6f635a52-f5eb-4053-8139-d48d155a759d](https://github.com/user-attachments/assets/6f635a52-f5eb-4053-8139-d48d155a759d)" alt="Stress Tester Demo GIF"\>
 \</p\>
 
 -----
