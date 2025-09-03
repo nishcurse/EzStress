@@ -1,18 +1,17 @@
 const express = require("express");
 const { promises: fs } = require("fs");
-const app = express();
-const { exec } = require("child_process");
+const { spawn } = require("child_process");
 const path = require("path");
-const os = require("os"); 
 const { v4: uuidv4 } = require('uuid');
-const cors  = require("cors")
+const cors = require("cors");
+
+const app = express();
 app.use(express.json());
 app.use(cors());
 
-
 async function CreateFile(brute, optimal, generative, dir) {
     try {
-        await fs.mkdir(dir, { recursive: true });        
+        await fs.mkdir(dir, { recursive: true });
         await fs.writeFile(path.join(dir, 'GenerateCases.cpp'), generative.trim());
         await fs.writeFile(path.join(dir, 'brute.cpp'), brute.trim());
         await fs.writeFile(path.join(dir, 'optimal.cpp'), optimal.trim());
@@ -43,35 +42,39 @@ app.post('/run-code', async function(req, res) {
 
     const tempDirName = `tempfile-${uuidv4()}`;
     const tempDirPath = path.join(__dirname, tempDirName);
-    
+
     try {
         await CreateFile(brute, optimal, generative, tempDirPath);
-        console.log("file Created", tempDirName);
-        
+        console.log("File Created", tempDirName);
+
         const dockerRun = `sudo docker run --rm -v "${tempDirPath}":/app/tests --workdir /app --network none --memory=512m --cpus="1.0" stress2 ./mn_load.sh`;
-            const execOptions = {
-                timeout: 10000,
-                maxBuffer: 1024 * 1024 * 10, 
-            };
 
+        const child = spawn(dockerRun, {
+            shell: true,
+            timeout: 10000
+        });
 
-        await exec(dockerRun, execOptions, async (error, stdout, stderr) => {
+        let output = "";
+
+        child.stdout.on('data', (data) => {
+            output += data.toString();
+        });
+
+        child.stderr.on('data', (data) => {
+            output += data.toString();
+        });
+
+        child.on('close', async (code) => {
             await DeleteFile(tempDirPath);
+            res.status(200).json({ output });
+        });
 
-            if (stderr) {
-                console.error("--- Detailed Script Execution Error ---");
-                console.error("Error Object:", error);
-                console.error("Stdout:", stdout);
-                console.error("Stderr:", stderr);
-                console.error("--- End of Error ---");
-                const errorMessage = stderr || error.message;
-                return res.status(500).json({ error: `Execution failed: ${stderr}` });
-            }
-            res.status(200).json({ output: stdout });
+        child.on('error', async (err) => {
+            await DeleteFile(tempDirPath);
+            res.status(500).json({ error: 'Failed to process request.' });
         });
 
     } catch (err) {
-        console.error('Processing error:', err);
         await DeleteFile(tempDirPath);
         res.status(500).json({ error: 'Failed to process request.' });
     }

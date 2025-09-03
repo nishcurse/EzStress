@@ -37,7 +37,7 @@ const Tabbar = () => {
 
   return (
 
-    <div className="flex flex-row justify-items-start space-x-4 mt-2 px-4 py-2 rounded-lg ring-blue-50 ring-1 -xl shadow-lg bg">
+    <div className="w-fit lex flex-row justify-items-start space-x-4 mt-2 px-4 py-2 rounded-lg ring-blue-50 ring-1 -xl shadow-lg bg">
       {tabs.map((tab) => (
 
         <Button
