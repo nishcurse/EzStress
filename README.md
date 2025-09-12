@@ -75,14 +75,6 @@ Script-File Interface
   <img width="1378" height="739" alt="image" src="https://github.com/user-attachments/assets/eeedda1f-7aa2-4a8d-8730-3ce05a010009" />
 </div>
 
-## 👨💻 The Team
-We built this to make stress testing easier for everyone!
-Feedback and contributions are *strongly* welcomed.
-**Team Coding Wiz**
-- [Nish](https://github.com/nishcurse)
-- [gokuu007](https://github.com/GokuUu007)
-
-***
 
 **Thank you for trying the Stress Tester!**  
 *Found a bug or want to suggest a feature? [Open an issue or PR](https://github.com/nishcurse/EzStressTester-/issues) — we appreciate your feedback!*
