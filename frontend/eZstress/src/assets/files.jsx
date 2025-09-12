@@ -42,18 +42,15 @@ int main(){
 const files = {
   "generate.cpp": {
     name: "generate.cpp",
-    language: "cpp",
     value: Gcode,
   },
   "optimal.cpp": {
     // Corrected the key spelling
     name: "optimal.cpp",
-    language: "cpp",
     value: Ocode,
   },
   "brute.cpp": {
     name: "brute.cpp",
-    language: "cpp",
     value: Bcode,
   },
 };

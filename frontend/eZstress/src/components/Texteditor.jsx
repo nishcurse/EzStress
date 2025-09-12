@@ -1,18 +1,41 @@
 import React from 'react'
-import Editor from "@monaco-editor/react";
+import {Editor} from "@monaco-editor/react";
+import FileStore from "../store/FileStore";
+import Curr from "../store/Curr";
 
 
-const Texteditor = ({title , code}) => {
+
+
+const Texteditor = () => {
+  const { currCont, setCurrCont } = FileStore((state) => state);
+  const { ActiveTab } = Curr((state) => state);
+
+  function handleEditorChange(newState) {
+    setCurrCont({
+      ...currCont,
+      [ActiveTab]: {
+        ...currCont[ActiveTab],
+        value: newState,
+      },
+    });
+  }
+
   return (
-    <div className='flex flex-col text-neutral-300'>
-    <h4 className='py-2 px-2'>{title} :</h4>
-      <Editor
-        height="600px"
-        width="340px"
-        defaultLanguage="cpp"
-        defaultValue={code}
-        theme="vs-dark"
-      ></Editor>
+    <div className="col-span-1 md:col-span-2">
+            <Editor
+              height="80vh"
+              theme="vs-dark"
+              path={currCont[ActiveTab].name}
+              defaultLanguage= "cpp"
+              value={currCont[ActiveTab].value}
+              onChange={handleEditorChange}
+              options={{
+                lineNumbersMinChars: 4,
+                minimap: {
+                  enabled: false,
+                },
+              }}
+            />
     </div>
   );
 }
