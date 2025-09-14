@@ -12,6 +12,7 @@
   "dependencies": {
     "@codingame/monaco-editor-react": "^17.0.0",
     "@monaco-editor/react": "^4.7.0",
+    "@radix-ui/react-scroll-area": "^1.2.10",
     "@tailwindcss/vite": "^4.1.12",
     "axios": "^1.11.0",
     "clsx": "^2.1.1",

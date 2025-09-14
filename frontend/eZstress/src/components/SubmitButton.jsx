@@ -4,6 +4,7 @@ import ButtStore from '../store/Rename';
 import FileStore from '../store/FileStore';
 import Curr from '../store/Curr';
 import Out from '../store/Output';
+import { BugPlayIcon } from 'lucide-react';
 
 
 const SubmitButton = () => {
@@ -43,15 +44,18 @@ const SubmitButton = () => {
   return (
     <button
       className={`
-        relative px-4 py-2.5 rounded-lg font-medium text-sm transition-all duration-200 ease-out
-        border backdrop-blur-sm
-        flex items-center gap-2 min-w-fit whitespace-nowrap 'bg-neutral-800/40 text- border-black/30 hover:bg-neutral-700/60 hover:text-white hover:border-neutral-600/40 hover:shadow-lg hover:shadow-neutral-900/20 hover:scale-[1.02] bg-white/80 text-blue border-neutral-500/40 shadow-lg shadow-blue-900/30 scale-[1.02] before:absolute before:inset-0 before:rounded-lg before:bg-gradient-to-r before:from-neutral-600/90 before:to-white-700/90 before:-z-10
+        px-2 py-1 my-1.5 rounded-lg font-medium text-sm transition-all duration-200 ease-out
+        bg-white text-black border border-gray-200
+        hover:bg-gray-400 hover:border-gray-950 hover:shadow-sm
+        active:bg-gray-100 active:scale-[0.98]
+        focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2
+        flex items-center gap-2 min-w-fit whitespace-nowrap
+        shadow-sm
       `}
       onClick={StressItUP}
     >
-      <span className="relative z-10 flex items-center gap-1.5">
-        {current}
-      </span>
+      <BugPlayIcon className="w-4 h-5 text-blue-500 " />
+      {current}
     </button>
   )
 }
