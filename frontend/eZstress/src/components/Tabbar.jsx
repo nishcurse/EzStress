@@ -9,6 +9,7 @@ const Tabbar = () => {
   const handleTabClick = (tabId) => {
     setActiveTab(tabId)
   }
+  
 
   const tabs = [
     { id: "generate", label: "generate.cpp" },

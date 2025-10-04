@@ -4,12 +4,13 @@ import FileStore from "./store/FileStore";
 import Header from "./components/Header";
 import Texteditor from "./components/Texteditor";
 import OutputEditor from "./components/OutputEditor";
-
+import ServerStore from "./store/ServerStore"
 
 
 function App() {
   const { ActiveTab } = Curr((state) => state);
   const { currCont } = FileStore((state) => state);
+  const { status } = ServerStore((state) => state.status);
 
 
   if (!currCont || !currCont[ActiveTab]) {
@@ -19,7 +20,7 @@ function App() {
       </div>
     );
   }
-
+  
   return (
     <div className="bg-neutral-900 h-screen flex flex-col">
       <div className="h-full flex flex-col overflow-y-auto">
@@ -31,7 +32,7 @@ function App() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 px-4  md:px-6 py-1">
           <Texteditor/>
           <div className="col-span-1">
-            <OutputEditor status={"online"}/>
+            <OutputEditor status={status}/>
           </div>
         </div>
       </div>
