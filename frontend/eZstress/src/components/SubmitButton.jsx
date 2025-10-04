@@ -31,7 +31,7 @@ const SubmitButton = () => {
 
     try {
       const url = import.meta.env.VITE_API_URL;
-      const resp = await axios.post(url, data);
+      const resp = await axios.post(`${url}run-code`, data);
       setOutput(resp.data.output);
       Updateme(`Stress-me`);
     } catch (error) {

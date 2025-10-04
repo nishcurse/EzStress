@@ -7,6 +7,7 @@ const cors = require("cors");
 const { rateLimit } = require("express-rate-limit");
 const util = require('util');
 
+
 const exec = util.promisify(require('child_process').exec);
 
 const limiter = rateLimit({
@@ -22,7 +23,7 @@ const limiter = rateLimit({
 const app = express();
 app.use(express.json());
 app.use(cors());
-app.use(limiter);
+// app.use(limiter);
 
 async function CreateFiles(brute, optimal, generative, dir) {
     try {
@@ -62,8 +63,7 @@ app.post('/run-code', async function(req, res) {
         await CreateFiles(brute, optimal, generative, tempDirPath);
         console.log("File Created", tempDirName);
 
-        const dockerRun = `sudo docker run --rm -v "${tempDirPath}":/app/tests --workdir /app --network none --memory=512m --cpus="1.0" stress2 ./mn_load.sh`;
-
+        const dockerRun = `sudo docker run --rm -v "${tempDirPath}":/app/tests --workdir /app --network none --memory=512m --cpus="1.0" stress3 ./mn_load.sh`;
         const child = spawn(dockerRun, {
             shell: true,
             timeout: 10000
@@ -96,6 +96,10 @@ app.post('/run-code', async function(req, res) {
         res.status(500).json({ error: 'Failed to process request due to file system error.' });
     }
 });
+
+app.get('/server-check' , (req, res)=>{
+    res.sendStatus(200);
+})
 
 app.listen(80, () => {
     console.log(`Server listening on port 80`);
